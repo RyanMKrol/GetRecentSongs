@@ -10,8 +10,14 @@ import Foundation
 import SwiftToolbox
 
 do {
+    let url = "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=somethingmeaty&api_key=deaf44dd2b81aa5bae31374e60ebd91c&format=json"
 
-    
+    let recentArtists = try InteractionHandler.fetch(
+        dataHandler: APIDataHandler<GetRecentTracksResponse>(url: URL(string: url)!)
+    )
+
+    print(try recentArtists.getMostRecentTrack().toString())
+
 
 } catch {
     print(error)

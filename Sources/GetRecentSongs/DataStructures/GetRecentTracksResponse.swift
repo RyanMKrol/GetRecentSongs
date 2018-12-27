@@ -7,26 +7,47 @@
 //  Song: I Love You Like An Alcoholic - The Taxpayers
 
 import Foundation
+import SwiftyJSON
 
 public struct GetRecentTracksResponse: Decodable {
     enum CodingKeys: String, CodingKey {
-        case tracks = "recenttracks"
+        case tracksResponse = "recenttracks"
     }
 
-    private let tracks: [Track]
+    private let tracksResponse: JSON
 
-    public func getTracks() throws -> [Track] {
-        guard self.tracks.count > 0 else {
+    public func getMostRecentTrack() throws -> Track {
+        let trackContainer = self.tracksResponse["track"]
+        let tracks = try JSONDecoder().decode([Track].self, from: try trackContainer.rawData())
+
+        guard tracks.count > 0 else {
             throw CommonErrors.NoSongs
         }
 
-        return self.tracks
+        return tracks[0]
+    }
+
+}
+
+public struct TrackResponse: Decodable {
+    public let track: [Track]
+
+    public func getTracks() throws -> [Track] {
+        guard self.track.count > 0 else {
+            throw CommonErrors.NoSongs
+        }
+
+        return self.track
     }
 }
 
 public struct Track: Decodable {
-    public let artist: Artist
-    public let name: String
+    private let artist: Artist
+    private let name: String
+
+    public func toString() -> String {
+        return "//  Song: \(self.name) - \(self.artist.name)"
+    }
 }
 
 public struct Artist: Decodable {
