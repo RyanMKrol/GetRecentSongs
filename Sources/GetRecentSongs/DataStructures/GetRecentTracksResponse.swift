@@ -46,7 +46,7 @@ public struct Track: Decodable {
     private let name: String
 
     public func toString() -> String {
-        return "//  Song: \(self.name) - \(self.artist.name)"
+        return "//  Song: \"\(self.name)\" - \"\(self.artist.name)\""
     }
 }
 
