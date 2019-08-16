@@ -7,7 +7,8 @@
 //  Song: I Love You Like An Alcoholic - The Taxpayers
 
 import Foundation
-import SwiftyJSON
+
+import struct SwiftyJSON.JSON
 
 public struct GetRecentTracksResponse: Decodable {
     enum CodingKeys: String, CodingKey {

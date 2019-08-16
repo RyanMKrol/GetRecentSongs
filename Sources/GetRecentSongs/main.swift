@@ -7,7 +7,9 @@
 //  Song: Love in This Club - Usher, Jeezy
 
 import Foundation
-import SwiftToolbox
+
+import class SwiftToolbox.APIDataHandler
+import class SwiftToolbox.InteractionHandler
 
 do {
     let url = "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=somethingmeaty&api_key=deaf44dd2b81aa5bae31374e60ebd91c&format=json"
